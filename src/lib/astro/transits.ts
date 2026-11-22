@@ -47,7 +47,7 @@ export function findIngresses(
   from: Date,
   to: Date,
   ayan: Ayanamsa = "lahiri",
-  node: NodeType = "true",
+  node: NodeType = "mean",
 ): Ingress[] {
   const step = body === "moon" ? DAY / 4 : DAY;
   const signAt = (t: number) => signOf(bodyPosition(body, new Date(t), ayan, node).lon);

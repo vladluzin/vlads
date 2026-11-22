@@ -30,6 +30,8 @@ const ru = (l: string) => l === "ru";
 const nm = (b: Body, l: string) => (ru(l) ? GRAHA_NAMES[b].ru : GRAHA_NAMES[b].en);
 const sg = (s: number, l: string) => (ru(l) ? SIGNS[s].ru : SIGNS[s].en);
 const day = (s: string) => s.slice(0, 10);
+const DIGNITY_RU: Record<string, string> = { exalted: "экзальтация", moolatrikona: "мулатрикона", own: "свой знак", friend: "у друга", neutral: "нейтрально", enemy: "у врага", debilitated: "падение" };
+const dig = (d: string, l: string) => (ru(l) ? DIGNITY_RU[d] ?? d : d);
 
 function SouthIndianChart({ data, locale }: { data: ChartData; locale: string }) {
   const size = 100;
@@ -37,7 +39,7 @@ function SouthIndianChart({ data, locale }: { data: ChartData; locale: string })
   for (const p of data.planets) {
     if (["uranus", "neptune", "pluto"].includes(p.body)) continue;
     const s = data.varga === "D1" ? p.sign : p.vargaSign;
-    const label = GRAHA_NAMES[p.body].abbr + (data.varga === "D1" ? ` ${Math.floor(p.degree)}°` : "") + (p.retrograde && p.body !== "rahu" && p.body !== "ketu" ? "ᴿ" : "");
+    const label = GRAHA_NAMES[p.body].abbr + (data.varga === "D1" ? ` ${Math.floor(p.degree)}°` : "") + (p.retrograde && p.body !== "rahu" && p.body !== "ketu" ? " R" : "");
     bySign.set(s, [...(bySign.get(s) ?? []), label]);
   }
   const asc = data.varga === "D1" ? data.ascendant.sign : data.ascendant.vargaSign;
@@ -103,7 +105,7 @@ export function ChartView({ locale, people }: { locale: string; people: { id: st
                   <td>{nm(p.body, locale)}</td><td>{sg(p.sign, locale)}</td><td>{formatDms(p.degree)}</td><td>{p.house}</td><td>{p.nakshatra.name} {p.nakshatra.pada}</td>
                   <td>
                     {p.karaka && <span className="pill">{p.karaka}</span>}
-                    {p.dignity && <span className="pill">{p.dignity}</span>}
+                    {p.dignity && <span className="pill">{dig(p.dignity, locale)}</span>}
                     {p.retrograde && p.body !== "rahu" && p.body !== "ketu" && <span className="pill">R</span>}
                     {p.combust && <span className="pill">{R ? "сожжена" : "combust"}</span>}
                     {p.vargottama && <span className="pill">vargottama</span>}

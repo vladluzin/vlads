@@ -102,7 +102,7 @@ button.danger { background: transparent; color: var(--danger); border: 1px solid
 .suggestions { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; max-width: 760px; margin: auto; width: 100%; }
 .suggestions button { background: var(--panel); color: var(--text); border: 1px solid var(--border); font-weight: 400; text-align: left; justify-content: flex-start; }
 .banner { max-width: 760px; margin: 0 auto 8px; padding: 10px 14px; border: 1px solid var(--accent); border-radius: 10px; color: var(--accent); font-size: 0.9rem; }
-@media (max-width: 800px) { .chat { grid-template-columns: 1fr; } .chat aside { display: none; } }
+@media (max-width: 800px) { .chat { grid-template-columns: 1fr; } .chat aside { display: none; } .nav { gap: 10px; } .nav .links { gap: 10px; font-size: 0.9rem; } }
 
 /* Chart */
 .chart-layout { display: grid; grid-template-columns: minmax(280px, 440px) 1fr; gap: 20px; padding: 20px 0 48px; }

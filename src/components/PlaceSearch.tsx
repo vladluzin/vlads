@@ -9,7 +9,7 @@ export interface PlaceValue {
 }
 
 interface Place { name: string; country: string | null; admin: string | null; latitude: number; longitude: number; timeZone: string }
-const label = (p: Place) => [p.name, p.admin, p.country].filter(Boolean).join(", ");
+const label = (p: Place) => [...new Set([p.name, p.admin, p.country].filter(Boolean))].join(", ");
 
 export function PlaceSearch({ value, onChange, placeholder, lang }: { value: PlaceValue | null; onChange: (v: PlaceValue) => void; placeholder: string; lang: string }) {
   const [q, setQ] = useState(value?.placeLabel ?? "");

@@ -51,4 +51,4 @@ export async function searchPlaces(query: string, language = "en", count = 6): P
 }
 
 export const placeLabel = (p: Pick<Place, "name" | "admin" | "country">) =>
-  [p.name, p.admin, p.country].filter(Boolean).join(", ");
+  [...new Set([p.name, p.admin, p.country].filter(Boolean))].join(", ");

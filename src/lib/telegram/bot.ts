@@ -1,4 +1,5 @@
 import { Bot, InlineKeyboard, type Context } from "grammy";
+import type { BotFullInfo } from "grammy/types";
 import { and, eq, gt } from "drizzle-orm";
 import { db, schema } from "../db";
 import { AgentError, afterTurn, runTurn } from "../agent/run";
@@ -189,8 +190,8 @@ async function answer(ctx: Context, state: State, text: string) {
   }
 }
 
-export function createBot(token: string) {
-  const bot = new Bot(token);
+export function createBot(token: string, botInfo?: BotFullInfo) {
+  const bot = new Bot(token, botInfo ? { botInfo } : undefined);
 
   bot.command("start", async (ctx) => {
     const payload = ctx.match?.trim();

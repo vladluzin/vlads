@@ -32,7 +32,8 @@ export interface ChartSettings {
   karakaScheme: 7 | 8;
 }
 
-export const DEFAULT_SETTINGS: ChartSettings = { ayanamsa: "lahiri", node: "true", karakaScheme: 7 };
+// Mean nodes match the published panchangs users compare against (true node differs by up to ~1.5°).
+export const DEFAULT_SETTINGS: ChartSettings = { ayanamsa: "lahiri", node: "mean", karakaScheme: 7 };
 
 export interface ChartInput {
   utc: Date;
